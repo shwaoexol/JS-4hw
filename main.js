@@ -29,7 +29,7 @@ function randomOperator(a, b) {
         result = a * b;
         symbol = '*';
     } else {
-        result = +(a / b);
+        result = (a / b);
         symbol = '/';
     }
 
