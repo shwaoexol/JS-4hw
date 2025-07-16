@@ -10,42 +10,47 @@ let current = +prompt('Введите нынешний год:');
 let notification = info(name, birth, current)
 alert(notification);
 
-function random(min,max) {
-    return Math.floor(Math.random() * ( max + 1 - min ) + min)
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function operators() {
-    let operators = ['+', '-', '*', '/'];
-    return Math.floor(Math.random() * operators)
+function randomOperator(a, b) {
+    let operator = random(1, 4);
+    let result;
+    let symbol;
+
+    if (operator === 1) {
+        result = a + b;
+        symbol = '+';
+    } else if (operator === 2) {
+        result = a - b;
+        symbol = '-';
+    } else if (operator === 3) {
+        result = a * b;
+        symbol = '*';
+    } else {
+        result = +(a / b);
+        symbol = '/';
+    }
+
+    return { result: result, sign: sign };
 }
 
-function examples(count, a, b) {
-    for(let i = 1; i <= count;i++) {
-        let one = random(a,b)
-        let two = random(a,b)
-        let operators = random();
-}
-let example = +prompt('Введите количество примеров')
-switch (example) {
-    case '+':
-        example = a + b;
-        break;
-     case '-':
-        example = a - b;
-        break;
-     case '*':
-        example = a * b;
-        break;
-    case '/':
-        example = a / b;
-        break;
-    default:
-        break;
-}
-let info = +prompt(`${i}) Сколько будет: ${num1} ${operator} ${num2} = ?`);
-let word = info == example ? 'Ваш ответ верный' : 'Неверно. Правильный ответ'
-console.log(`${a} ${operator} ${b} = ${example}. Ваш ответ: ${info}. ${word}`);
+let example = +prompt('Введите количество примеров');
+let min = 1;
+let max = 10;
+
+for (let i = 1; i <= example; i++) {
+    let a = random(min, max);
+    let b = random(min, max);
+
+    let operation = randomOperator(a, b);
+    let user = +prompt(`${a} ${operation.symbol} ${b} = ?`);
+
+    let message = (user === operation.result)
+        ? 'Ваш ответ верный'
+        : `Ваш ответ неверный. Правильный ответ: ${operation.result}`;
+
+    console.log(`${a} ${operation.symbol} ${b} = ${operation.result}. Ваш ответ: ${user}. ${message}`);
 }
 
-  
-  
